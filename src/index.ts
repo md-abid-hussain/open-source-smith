@@ -64,9 +64,7 @@ program
 
 program.parse(process.argv);
 
-// Handle exit using Ctrl+C gracefully
 process.on("SIGINT", () => {
   console.log("Received SIGINT. Exiting gracefully...");
-  // Perform any necessary cleanup here
   process.exit(0);
 });
