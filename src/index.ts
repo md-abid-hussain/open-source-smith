@@ -4,9 +4,8 @@ import { Command } from "commander";
 import { input, select } from "@inquirer/prompts";
 import { ExitPromptError } from "@inquirer/core";
 import { TemplateStrategy } from "./command/TemplateStrategy";
-import { ExpressStarterKit } from "./command/ExpressStarterKit";
-import { ReactStarterKit } from "./command/ReactStarterKit";
-import { NextJsStarterKit } from "./command/NextJsStarterKit";
+import { FrontendStarterKit } from "./command/FrontendStarterKit";
+import { BackendStarterKit } from "./command/BackendStarterKit";
 import { FullStackStarterKit } from "./command/FullStackStarterKit";
 
 const program = new Command();
@@ -22,12 +21,11 @@ program
   .action(async () => {
     try {
       const template = await select({
-        message: "Select a template",
+        message: "What do you want to build?",
         choices: [
-          { name: "Express-ts starter kit", value: "template-express-ts" },
-          { name: "Full stack starter kit", value: "template-full-stack" },
-          { name: "React starter kit", value: "template-react" },
-          { name: "NextJS starter kit", value: "template-nextjs" },
+          { name: "Frontend project", value: "template-frontend" },
+          { name: "Backend project", value: "template-backend" },
+          { name: "Full stack project", value: "template-full" },
         ],
       });
 
@@ -39,16 +37,13 @@ program
       let strategy: TemplateStrategy;
 
       switch (template) {
-        case "template-express-ts":
-          strategy = new ExpressStarterKit();
+        case "template-frontend":
+          strategy = new FrontendStarterKit();
           break;
-        case "template-react":
-          strategy = new ReactStarterKit();
+        case "template-backend":
+          strategy = new BackendStarterKit();
           break;
-        case "template-nextjs":
-          strategy = new NextJsStarterKit();
-          break;
-        case "template-full-stack":
+        case "template-full":
           strategy = new FullStackStarterKit();
           break;
         default:

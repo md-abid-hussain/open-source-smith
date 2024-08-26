@@ -1,11 +1,31 @@
 import { TemplateStrategy } from "./TemplateStrategy";
-import { ExpressStarterKit } from "./ExpressStarterKit";
-import { ReactStarterKit } from "./ReactStarterKit";
+import { BackendStarterKit } from "./BackendStarterKit";
+import { FrontendStarterKit } from "./FrontendStarterKit";
+import { NextJsStarterKit } from "./NextJsStarterKit";
+import { select } from "@inquirer/prompts";
 import fs from "fs";
 import path from "path";
 
 export class FullStackStarterKit implements TemplateStrategy {
-  generate(projectName: string): void {
+  async generate(projectName: string): Promise<void> {
+    const template = await select({
+      message: "Select a template",
+      choices: [
+        { name: "FullStack - Express(Backend)", value: "template-fullstack" },
+        {
+          name: "FullStack - NextJs + PostgreSQL(neon)",
+          value: "template-nextjs",
+        },
+      ],
+    });
+
+    if (template === "template-fullstack") {
+      this.generateFullStackProject(projectName);
+    } else {
+      new NextJsStarterKit().generate(projectName);
+    }
+  }
+  generateFullStackProject(projectName: string) {
     const projectPath = path.join(process.cwd(), projectName);
     if (!fs.existsSync(projectPath)) {
       fs.mkdirSync(projectPath);
@@ -25,12 +45,13 @@ export class FullStackStarterKit implements TemplateStrategy {
 
     process.chdir(projectPath);
     // Generate Express backend
-    const expressStarterKit = new ExpressStarterKit();
-    expressStarterKit.generate("backend");
+    const backendStarterKit = new BackendStarterKit();
 
     // Generate React frontend
-    const reactStarterKit = new ReactStarterKit();
-    reactStarterKit.generate("frontend");
+    const frontendStarterKit = new FrontendStarterKit();
+    frontendStarterKit.generate("frontend").then(() => {
+      backendStarterKit.generate("backend");
+    });
 
     console.log(`Full stack project ${projectName} initialized`);
   }
