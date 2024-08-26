@@ -9,10 +9,15 @@
     "build": "tsc",
     "start": "node dist/index.js init"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli",
+    "open-source",
+    "project",
+    "typescript"
+  ],
+  "author": "Md Abid Hussain",
   "license": "ISC",
-  "description": "",
+  "description": "A CLI tool to automate the process of creating open-source projects",
   "devDependencies": {
     "typescript": "^5.5.4"
   },

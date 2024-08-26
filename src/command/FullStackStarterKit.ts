@@ -1,7 +1,7 @@
 import { TemplateStrategy } from "./TemplateStrategy";
 import { BackendStarterKit } from "./BackendStarterKit";
 import { FrontendStarterKit } from "./FrontendStarterKit";
-import { NextJsStarterKit } from "./NextJsStarterKit";
+import { NextJsStarterKit } from "./FrontendKit/NextJsStarterKit";
 import { select } from "@inquirer/prompts";
 import fs from "fs";
 import path from "path";

@@ -16,7 +16,7 @@ program
   .version("0.0.1");
 
 program
-  .command("init")
+  .command("forge")
   .description("Initialize a new open-source project")
   .action(async () => {
     try {

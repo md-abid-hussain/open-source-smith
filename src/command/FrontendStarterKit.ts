@@ -1,7 +1,7 @@
 import { TemplateStrategy } from "./TemplateStrategy";
-import { ReactStarterKit } from "./ReactStarterKit";
-import { ViteStarterKit } from "./ViteStarterKit";
-import { NextJsStarterKit } from "./NextJsStarterKit";
+import { ReactStarterKit } from "./FrontendKit/ReactStarterKit";
+import { ViteStarterKit } from "./FrontendKit/ViteStarterKit";
+import { NextJsStarterKit } from "./FrontendKit/NextJsStarterKit";
 import { select } from "@inquirer/prompts";
 
 export class FrontendStarterKit implements TemplateStrategy {
