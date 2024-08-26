@@ -1,4 +1,4 @@
-import { TemplateStrategy } from "./TemplateStrategy";
+import { TemplateStrategy } from "../TemplateStrategy";
 import fs from "fs";
 import path from "path";
 import simpleGit from "simple-git";

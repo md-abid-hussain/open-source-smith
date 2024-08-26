@@ -1,4 +1,4 @@
-import { TemplateStrategy } from "./TemplateStrategy";
+import { TemplateStrategy } from "../TemplateStrategy";
 import { execSync } from "child_process";
 import { confirm } from "@inquirer/prompts";
 
