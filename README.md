@@ -23,7 +23,7 @@ npm install -g open-source-smith
 After installation, you can use the CLI tool to generate different types of starter kits. For example:
 
 ```sh
-open-source-smith init
+open-source-smith forge
 ```
 
 ## Commands
