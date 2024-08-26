@@ -1,6 +1,6 @@
 {
   "name": "open-source-smith",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "bin": {
     "open-source-smith": "dist/index.js"
