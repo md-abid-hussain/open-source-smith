@@ -20,15 +20,24 @@ npm install -g open-source-smith
 
 ## Usage
 
-After installation, you can use the CLI tool to generate different types of starter kits. For example:
+- After installation, you can use the CLI tool to generate different types of starter kits. For example:
 
 ```sh
 open-source-smith forge
 ```
 
+- To use a specific GitHub repository as a template:
+
+```sh
+open-source-smith forge --from "username@template-name"
+```
+
+`user@template-name` can be found at [OpenSourceSmith - Templates](https://opensourcesmith.vercel.app/)
+
 ## Commands
 
 - `forge` : Initialize a new open-source project
+  - `--from <template>` : Use a specific OpenSourceSmith template
 
 ### Project Types
 

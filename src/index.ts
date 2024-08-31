@@ -7,6 +7,7 @@ import { TemplateStrategy } from "./command/TemplateStrategy";
 import { FrontendStarterKit } from "./command/FrontendStarterKit";
 import { BackendStarterKit } from "./command/BackendStarterKit";
 import { FullStackStarterKit } from "./command/FullStackStarterKit";
+import { downloadTemplate } from "./command/DownloadTemplate";
 
 const program = new Command();
 
@@ -18,39 +19,46 @@ program
 program
   .command("forge")
   .description("Initialize a new open-source project")
-  .action(async () => {
+  .option(
+    "--from <template>",
+    "Use a template from https://opensourcesmith.vercel.app/templates"
+  )
+  .action(async (options) => {
     try {
-      const template = await select({
-        message: "What do you want to build?",
-        choices: [
-          { name: "Frontend project", value: "template-frontend" },
-          { name: "Backend project", value: "template-backend" },
-          { name: "Full stack project", value: "template-full" },
-        ],
-      });
-
       const projectName = await input({
         message: "Enter project name",
         default: "my-project",
       });
 
-      let strategy: TemplateStrategy;
+      if (options.from) {
+        downloadTemplate(options.from, projectName);
+      } else {
+        const template = await select({
+          message: "What do you want to build?",
+          choices: [
+            { name: "Frontend project", value: "template-frontend" },
+            { name: "Backend project", value: "template-backend" },
+            { name: "Full stack project", value: "template-full" },
+          ],
+        });
 
-      switch (template) {
-        case "template-frontend":
-          strategy = new FrontendStarterKit();
-          break;
-        case "template-backend":
-          strategy = new BackendStarterKit();
-          break;
-        case "template-full":
-          strategy = new FullStackStarterKit();
-          break;
-        default:
-          throw new Error("Unknown template");
+        let strategy: TemplateStrategy;
+
+        switch (template) {
+          case "template-frontend":
+            strategy = new FrontendStarterKit();
+            break;
+          case "template-backend":
+            strategy = new BackendStarterKit();
+            break;
+          case "template-full":
+            strategy = new FullStackStarterKit();
+            break;
+          default:
+            throw new Error("Unknown template");
+        }
+        strategy.generate(projectName);
       }
-
-      strategy.generate(projectName);
     } catch (error) {
       if (error instanceof ExitPromptError) {
         console.log("Prompt was force closed");
